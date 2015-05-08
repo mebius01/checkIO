@@ -28,10 +28,12 @@ checkio([10, 9, 10, 10, 9, 8]) == [10, 9, 10, 10, 9]
 """
 #Your optional code here
 #You can import some modules or create additional functions
-
-
 def checkio(data):
-	
+	l=[]
+	for i in data:
+		if data.count(i) >= 2:
+			l.append(i)
+	return l
 #Some hints
 #You can use list.count(element) method for counting.
 #Create new list with non-unique elements
