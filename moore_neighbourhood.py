@@ -25,27 +25,57 @@
 Предусловия:
  3 ≤ len(grid) ≤ 10
 """
+
 def count_neighbours(grid, row, col):
-	return 0
+	if (row == 0) and (col == 0): #(0,0)
+		return grid[row][col+1]+grid[row+1][col+1]+grid[row+1][col]
+	elif (row == 0) and ((col > 0) and (col < len(grid[0])-1)): #(0,1)
+		return grid[row][col-1] + grid[row+1][col-1] + grid[row+1][col] + grid[row+1][col+1] + grid[row][col+1]
+	elif (row == 0) and (col == len(grid[0])-1): #(0,5)
+		return grid[row][col-1] + grid[row+1][col-1] + grid[row+1][col]
+
+	elif ((row > 0) and row < len(grid[0])-1) and (col == 0): #(1,0)
+		return grid[row-1][col] + grid[row-1][col+1] + grid[row][col+1] + grid[row+1][col+1] + grid[row+1][col]
+	elif ((row > 0) and row < len(grid[0])-1) and ((col > 0) and (col < len(grid[0])-1)): #(1,1)
+		return grid[row-1][col-1] + grid[row-1][col] + grid[row-1][col+1] + grid[row][col-1] + grid[row][col+1] + grid[row+1][col-1] + grid[row+1][col] + grid[row+1][col+1]
+	elif (row < len(grid[0])-1) and (col == len(grid[0])-1): #(1,5)
+		return grid[row-1][col-1] + grid[row-1][col] + grid[row][col-1] + grid[row+1][col-1] + grid[row+1][col]
+
+	elif (row == len(grid[0])-1) and (col == 0): #(5,0)
+		return grid[row-1][col] + grid[row-1][col+1] + grid[row][col+1]
+	elif (row == len(grid[0])-1) and ((col > 0) and (col < len(grid[0])-1)): #(5,1)
+		return grid[row-1][col-1] + grid[row-1][col] + grid[row-1][col+1] + grid[row][col-1] + grid[row][col+1]
+	elif (row == len(grid)-1) and (col == len(grid[0])-1): #(5,5)
+		return grid[row-1][col-1] + grid[row-1][col] + grid[row][col-1] 
 
 
-if __name__ == '__main__':
-	#These "asserts" using only for self-checking and not necessary for auto-testing
-	assert count_neighbours(
-		((1, 0, 0, 1, 0),
-		 (0, 1, 0, 0, 0),
-		 (0, 0, 1, 0, 1),
-		 (1, 0, 0, 0, 0),
-		 (0, 0, 1, 0, 0),), 1, 2) == 3, "1st example"
-	assert count_neighbours(((1, 0, 0, 1, 0),
-							 (0, 1, 0, 0, 0),
-							 (0, 0, 1, 0, 1),
-							 (1, 0, 0, 0, 0),
-							 (0, 0, 1, 0, 0),), 0, 0) == 1, "2nd example"
-	assert count_neighbours(((1, 1, 1),
-							 (1, 1, 1),
-							 (1, 1, 1),), 0, 2) == 3, "Dense corner"
-	assert count_neighbours(((0, 0, 0),
-							 (0, 1, 0),
-							 (0, 0, 0),), 1, 1) == 0, "Single"
 
+
+#~ if __name__ == '__main__':
+	#~ #These "asserts" using only for self-checking and not necessary for auto-testing
+	#~ assert count_neighbours(
+		#~ ((1, 0, 0, 1, 0),
+		 #~ (0, 1, 0, 0, 0),
+		 #~ (0, 0, 1, 0, 1),
+		 #~ (1, 0, 0, 0, 0),
+		 #~ (0, 0, 1, 0, 0),), 1, 2) == 3, "1st example"
+	#~ assert count_neighbours(((1, 0, 0, 1, 0),
+							 #~ (0, 1, 0, 0, 0),
+							 #~ (0, 0, 1, 0, 1),
+							 #~ (1, 0, 0, 0, 0),
+							 #~ (0, 0, 1, 0, 0),), 0, 0) == 1, "2nd example"
+	#~ assert count_neighbours(((1, 1, 1),
+							 #~ (1, 1, 1),
+							 #~ (1, 1, 1),), 0, 2) == 3, "Dense corner"
+	#~ assert count_neighbours(((0, 0, 0),
+							 #~ (0, 1, 0),
+							 #~ (0, 0, 0),), 1, 1) == 0, "Single"
+
+
+print count_neighbours(
+			((1,0,1,0,1),
+			(0,1,0,1,0),
+			(1,0,1,0,1),
+			(0,1,0,1,0),
+			(1,0,1,0,1),
+			(0,1,0,1,0),), 5, 4)
